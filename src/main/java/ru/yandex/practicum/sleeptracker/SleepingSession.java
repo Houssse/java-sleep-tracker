@@ -12,4 +12,16 @@ public class SleepingSession {
         this.endSleeping = endSleeping;
         this.sleepQuality = sleepQuality;
     }
+
+    public LocalDateTime getStartSleeping() {
+        return startSleeping;
+    }
+
+    public LocalDateTime getEndSleeping() {
+        return endSleeping;
+    }
+
+    public SleepQuality getSleepQuality() {
+        return sleepQuality;
+    }
 }
