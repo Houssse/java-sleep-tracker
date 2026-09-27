@@ -1,5 +1,6 @@
 package ru.yandex.practicum.sleeptracker;
 
+import ru.yandex.practicum.sleeptracker.function.MinimalSessionFunction;
 import ru.yandex.practicum.sleeptracker.function.SleepAnalysisResult;
 import ru.yandex.practicum.sleeptracker.function.TotalSessionFunction;
 
@@ -9,7 +10,8 @@ import java.util.function.Function;
 public class SleepTrackerApp {
     private final String FILE_NAME = "src/main/resources/sleep_log.txt";
     private final List<Function<List<SleepingSession>, SleepAnalysisResult>> functions = List.of(
-            new TotalSessionFunction()
+            new TotalSessionFunction(),
+            new MinimalSessionFunction()
     );
 
     public static void main(String[] args) {
