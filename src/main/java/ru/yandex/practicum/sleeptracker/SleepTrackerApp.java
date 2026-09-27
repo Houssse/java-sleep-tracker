@@ -1,5 +1,6 @@
 package ru.yandex.practicum.sleeptracker;
 
+import ru.yandex.practicum.sleeptracker.function.SleepAnalysisResult;
 import ru.yandex.practicum.sleeptracker.function.TotalSessionFunction;
 
 import java.util.List;
