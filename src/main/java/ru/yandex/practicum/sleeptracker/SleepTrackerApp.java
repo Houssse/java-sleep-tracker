@@ -13,7 +13,8 @@ public class SleepTrackerApp {
             new MaximumSessionFunction(),
             new AverageSessionFunction(),
             new BadSessionFunction(),
-            new SleeplessNightsFunction()
+            new SleeplessNightsFunction(),
+            new ChronotypeFunction()
     );
 
     public static void main(String[] args) {
