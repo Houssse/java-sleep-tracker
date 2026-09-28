@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.function.Function;
 
 public class SleepTrackerApp {
-    private final String FILE_NAME = "src/main/resources/sleep_log.txt";
-    private final List<Function<List<SleepingSession>, SleepAnalysisResult>> functions = List.of(
+
+    private static final List<Function<List<SleepingSession>, SleepAnalysisResult>> functions = List.of(
             new TotalSessionFunction(),
             new MinimalSessionFunction(),
             new MaximumSessionFunction(),
@@ -18,12 +18,16 @@ public class SleepTrackerApp {
     );
 
     public static void main(String[] args) {
-        SleepTrackerApp app = new SleepTrackerApp();
+        if (args.length == 0) {
+            throw new IllegalArgumentException(
+                    "Необходимо указать путь к файлу с логом сна"
+            );
+        }
 
-        List<SleepingSession> sessions = ReadFile.readFile(app.FILE_NAME);
+        List<SleepingSession> sessions = ReadFile.readFile(args[0]);
 
-        app.functions.forEach(f -> {
-            SleepAnalysisResult result = f.apply(sessions);
+        functions.forEach(function -> {
+            SleepAnalysisResult result = function.apply(sessions);
             System.out.println(result);
         });
     }

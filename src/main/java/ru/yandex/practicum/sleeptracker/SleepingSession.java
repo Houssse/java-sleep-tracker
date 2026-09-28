@@ -3,9 +3,9 @@ package ru.yandex.practicum.sleeptracker;
 import java.time.LocalDateTime;
 
 public class SleepingSession {
-    private LocalDateTime startSleeping;
-    private LocalDateTime endSleeping;
-    private SleepQuality sleepQuality;
+    private final LocalDateTime startSleeping;
+    private final LocalDateTime endSleeping;
+    private final SleepQuality sleepQuality;
 
     public SleepingSession(LocalDateTime startSleeping, LocalDateTime endSleeping, SleepQuality sleepQuality) {
         this.startSleeping = startSleeping;

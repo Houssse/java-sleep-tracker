@@ -22,7 +22,7 @@ class BadSessionFunctionTest {
 
         SleepAnalysisResult result = function.apply(sessions);
 
-        assertEquals(0, result.getValue());
+        assertEquals(0L, result.getValue());
     }
 
     @Test
@@ -35,7 +35,7 @@ class BadSessionFunctionTest {
 
         SleepAnalysisResult result = function.apply(sessions);
 
-        assertEquals(1, result.getValue());
+        assertEquals(1L, result.getValue());
     }
 
     @Test
@@ -50,7 +50,7 @@ class BadSessionFunctionTest {
 
         SleepAnalysisResult result = function.apply(sessions);
 
-        assertEquals(3, result.getValue());
+        assertEquals(3L, result.getValue());
     }
 
     @Test

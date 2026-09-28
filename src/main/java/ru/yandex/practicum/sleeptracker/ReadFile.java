@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 public final class ReadFile {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
-    private ReadFile() {}
+    private ReadFile() {
+    }
 
     public static List<SleepingSession> readFile(String fileName) {
         if (!checkPath(fileName)) {

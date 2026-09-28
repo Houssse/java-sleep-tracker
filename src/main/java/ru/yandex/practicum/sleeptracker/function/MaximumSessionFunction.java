@@ -14,6 +14,6 @@ public class MaximumSessionFunction implements Function<List<SleepingSession>, S
                 .max()
                 .orElse(0);
 
-        return new SleepAnalysisResult("Максимальная продолжительность сессии сна",  minutes);
+        return new SleepAnalysisResult("Максимальная продолжительность сессии сна", minutes);
     }
 }

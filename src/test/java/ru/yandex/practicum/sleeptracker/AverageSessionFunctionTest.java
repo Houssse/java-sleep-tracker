@@ -31,7 +31,7 @@ class AverageSessionFunctionTest {
     void apply_returnsCorrectDescription() {
         SleepAnalysisResult result = function.apply(List.of());
 
-        assertEquals("Средняя продолжительность сна ", result.getDescription());
+        assertEquals("Средняя продолжительность сна", result.getDescription());
     }
 
     private SleepingSession session(LocalDateTime start, LocalDateTime end) {
