@@ -1,21 +1,20 @@
 package ru.yandex.practicum.sleeptracker;
 
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.sleeptracker.function.MinimalSessionFunction;
+import ru.yandex.practicum.sleeptracker.function.MaximumSessionFunction;
 import ru.yandex.practicum.sleeptracker.function.SleepAnalysisResult;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
+class MaximumSessionFunctionTest {
 
-class MinimalSessionFunctionTest {
-
-    private final MinimalSessionFunction function = new MinimalSessionFunction();
+    private final MaximumSessionFunction function = new MaximumSessionFunction();
 
     @Test
-    void multipleSessions_returnsMinimal() {
+    void multipleSessions_returnsMaximum() {
         List<SleepingSession> sessions = List.of(
                 session(LocalDateTime.of(2025, 10, 1, 23, 0),
                         LocalDateTime.of(2025, 10, 2, 7, 0)),
@@ -27,14 +26,14 @@ class MinimalSessionFunctionTest {
 
         SleepAnalysisResult result = function.apply(sessions);
 
-        assertEquals(390L, result.getValue());
+        assertEquals(600L, result.getValue());
     }
 
     @Test
     void returnsCorrectDescription() {
         SleepAnalysisResult result = function.apply(List.of());
 
-        assertEquals("Минимальная продолжительность сессии сна", result.getDescription());
+        assertEquals("Максимальная продолжительность сессии сна", result.getDescription());
     }
 
     private SleepingSession session(LocalDateTime start, LocalDateTime end) {
