@@ -14,14 +14,14 @@ public class TotalSessionFunctionTest {
     private final TotalSessionFunction function = new TotalSessionFunction();
 
     @Test
-    void apply_emptyList_returnsZero() {
+    void emptyList_returnsZero() {
         SleepAnalysisResult result = function.apply(List.of());
 
         assertEquals(0L, result.getValue());
     }
 
     @Test
-    void apply_oneSession_returnsOne() {
+    void oneSession_returnsOne() {
         List<SleepingSession> sessions = List.of(
                 session(LocalDateTime.of(2025, 10, 1, 23, 15),
                         LocalDateTime.of(2025, 10, 2, 7, 30))
