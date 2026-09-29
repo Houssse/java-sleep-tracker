@@ -44,13 +44,8 @@ public class ChronotypeFunction
     private boolean isNightSession(SleepingSession session) {
         LocalDate startDate = session.getStartSleeping().toLocalDate();
 
-        return intersectsNight(
-                session,
-                startDate
-        ) || intersectsNight(
-                session,
-                startDate.plusDays(1)
-        );
+        return intersectsNight(session, startDate)
+                || intersectsNight(session, startDate.plusDays(1));
     }
 
     private boolean intersectsNight(
@@ -72,19 +67,38 @@ public class ChronotypeFunction
     }
 
     private Chronotype defineChronotype(SleepingSession session) {
-        LocalTime sleepTime =
-                session.getStartSleeping().toLocalTime();
+        LocalTime sleepTime = session.getStartSleeping().toLocalTime();
+        LocalTime wakeTime = session.getEndSleeping().toLocalTime();
 
-        LocalTime wakeTime =
-                session.getEndSleeping().toLocalTime();
+        int sleepMinutes = sleepTime.getHour() * 60
+                + sleepTime.getMinute();
 
-        if (sleepTime.isAfter(OWL_SLEEP_TIME)
-                && wakeTime.isAfter(OWL_WAKE_TIME)) {
+        int wakeMinutes = wakeTime.getHour() * 60
+                + wakeTime.getMinute();
+
+        if (sleepMinutes < 12 * 60) {
+            sleepMinutes += 24 * 60;
+        }
+
+        int owlSleepMinutes = OWL_SLEEP_TIME.getHour() * 60
+                + OWL_SLEEP_TIME.getMinute();
+
+        int owlWakeMinutes = OWL_WAKE_TIME.getHour() * 60
+                + OWL_WAKE_TIME.getMinute();
+
+        int larkSleepMinutes = LARK_SLEEP_TIME.getHour() * 60
+                + LARK_SLEEP_TIME.getMinute();
+
+        int larkWakeMinutes = LARK_WAKE_TIME.getHour() * 60
+                + LARK_WAKE_TIME.getMinute();
+
+        if (sleepMinutes > owlSleepMinutes
+                && wakeMinutes > owlWakeMinutes) {
             return Chronotype.OWL;
         }
 
-        if (sleepTime.isBefore(LARK_SLEEP_TIME)
-                && wakeTime.isBefore(LARK_WAKE_TIME)) {
+        if (sleepMinutes < larkSleepMinutes
+                && wakeMinutes < larkWakeMinutes) {
             return Chronotype.LARK;
         }
 
@@ -92,20 +106,9 @@ public class ChronotypeFunction
     }
 
     private Chronotype findChronotype(Map<Chronotype, Long> counts) {
-        long owls = counts.getOrDefault(
-                Chronotype.OWL,
-                0L
-        );
-
-        long larks = counts.getOrDefault(
-                Chronotype.LARK,
-                0L
-        );
-
-        long pigeons = counts.getOrDefault(
-                Chronotype.PIGEON,
-                0L
-        );
+        long owls = counts.getOrDefault(Chronotype.OWL, 0L);
+        long larks = counts.getOrDefault(Chronotype.LARK, 0L);
+        long pigeons = counts.getOrDefault(Chronotype.PIGEON, 0L);
 
         if (owls > larks && owls > pigeons) {
             return Chronotype.OWL;

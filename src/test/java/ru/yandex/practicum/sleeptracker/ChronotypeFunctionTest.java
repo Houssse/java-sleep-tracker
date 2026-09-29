@@ -108,6 +108,26 @@ class ChronotypeFunctionTest {
         assertEquals(Chronotype.OWL, result.getValue());
     }
 
+    @Test
+    void sleepAfterMidnight_isNotLark() {
+        List<SleepingSession> sessions = List.of(
+                new SleepingSession(
+                        LocalDateTime.of(2026, 1, 1, 23, 30),
+                        LocalDateTime.of(2026, 1, 2, 10, 0),
+                        SleepQuality.GOOD
+                ),
+                new SleepingSession(
+                        LocalDateTime.of(2026, 1, 3, 0, 30),
+                        LocalDateTime.of(2026, 1, 3, 8, 0),
+                        SleepQuality.GOOD
+                )
+        );
+
+        SleepAnalysisResult result = function.apply(sessions);
+
+        assertEquals(Chronotype.PIGEON, result.getValue());
+    }
+
     private SleepingSession session(
             LocalDateTime start,
             LocalDateTime end) {
